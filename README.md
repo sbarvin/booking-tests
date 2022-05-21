@@ -1,2 +1,6 @@
-# Autotests for https://demo.api-platform.com/
-UI + API tests using Selenide + Rest-Assured + Java
+# Проект по автоматизации тестирования API и UI
+https://automationintesting.online/#/
+
+Содержание
+Технологии и инструменты
+Реализованные проверки
