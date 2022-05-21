@@ -1,4 +1,4 @@
-package io.tests;
+package booking.tests.ui;
 
 public class TestBase {
 }
