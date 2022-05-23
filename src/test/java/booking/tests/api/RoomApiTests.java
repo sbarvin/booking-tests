@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class RoomApiTests {
 
     private final ApiClient apiClient = ApiClient.api();
@@ -26,72 +28,93 @@ public class RoomApiTests {
     @Test
     @DisplayName("Get all rooms")
     void getRoomsTest() {
-        apiClient.room().create(TestData.newRoom());
+        Room createdRoom = apiClient.room().create(TestData.newRoom())
+                .then()
+                .extract().as(Room.class);
 
         Rooms rooms = apiClient.room().getAll()
                 .then()
                 .statusCode(200)
                 .extract().as(Rooms.class);
+
+        assertTrue(rooms.getRooms().size() > 0);
+        assertTrue(rooms.getRooms().contains(createdRoom));
+
+        apiClient.room().del(createdRoom.getRoomid().toString());
     }
 
     @Test
-    @DisplayName("Get room by id")
+    @DisplayName("Get room")
     void getRoomTest() {
 
-        Room newRoom = apiClient.room().create(TestData.newRoom())
+        Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
                 .extract().as(Room.class);
 
-        Room room = apiClient.room().getById(newRoom.getRoomid().toString())
+        Room room = apiClient.room().getById(createdRoom.getRoomid().toString())
                 .then()
                 .statusCode(200)
                 .extract().as(Room.class);
 
-        apiClient.room().del(room.getRoomid().toString())
-                .then()
-                .statusCode(202);
+        assertEquals(createdRoom, room);
+
+        apiClient.room().del(createdRoom.getRoomid().toString());
     }
 
     @Test
-    @DisplayName("Create new room")
+    @DisplayName("Create room")
     void createRoomTest() {
-        Room newRoom = apiClient.room().create(TestData.newRoom())
+        Room room = TestData.newRoom();
+
+        Room createdRoom = apiClient.room().create(room)
                 .then()
+                .statusCode(201)
                 .extract().as(Room.class);
 
-        apiClient.room().del(newRoom.getRoomid().toString())
+        assertEquals(createdRoom.getRoomName(), room.getRoomName());
+        assertNotNull(createdRoom.getRoomid());
+
+        apiClient.room().getById(createdRoom.getRoomid().toString())
                 .then()
-                .statusCode(202);
+                .statusCode(200);
+
+        apiClient.room().del(createdRoom.getRoomid().toString());
     }
 
     @Test
     @DisplayName("Update room")
     void updateRoomTest() {
-        Room newRoom = apiClient.room().create(TestData.newRoom())
+        Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
                 .extract().as(Room.class);
 
-        newRoom.setRoomName(newRoom.getRoomName() + "UPD");
+        String newRoomName = createdRoom.getRoomName() + "UPD";
+        createdRoom.setRoomName(newRoomName);
 
-        Room updatedRoom = apiClient.room().update(newRoom)
+        Room updatedRoom = apiClient.room().update(createdRoom)
                 .then()
                 .statusCode(202)
                 .extract().as(Room.class);
 
-        apiClient.room().del(updatedRoom.getRoomid().toString())
-                .then()
-                .statusCode(202);
+        assertEquals(updatedRoom.getRoomName(), newRoomName);
+        assertEquals(updatedRoom, createdRoom);
+
+        apiClient.room().del(updatedRoom.getRoomid().toString());
     }
 
     @Test
     @DisplayName("Delete room")
     void deleteRoomTest() {
-        Room newRoom = apiClient.room().create(TestData.newRoom())
+        Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
                 .extract().as(Room.class);
 
-        apiClient.room().del(newRoom.getRoomid().toString())
+        apiClient.room().del(createdRoom.getRoomid().toString())
                 .then()
                 .statusCode(202);
+
+        apiClient.room().getById(createdRoom.getRoomid().toString())
+                .then()
+                .statusCode(404);
     }
 }
