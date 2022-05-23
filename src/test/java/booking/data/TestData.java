@@ -2,24 +2,62 @@ package booking.data;
 
 import booking.api.model.auth.User;
 import booking.api.model.booking.Booking;
+import booking.api.model.booking.BookingDates;
+import booking.api.model.room.Room;
 import booking.config.App;
+import com.github.javafaker.Faker;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TestData {
+
+    private final static Faker faker = new Faker();
 
     private TestData() {
     }
 
     public static User defaultUser() {
-        User authLoginRequest = new User();
-        authLoginRequest.setUsername(App.config.defaultLogin());
-        authLoginRequest.setPassword(App.config.defaultPassword());
+        User user = new User();
+        user.setUsername(App.config.defaultLogin());
+        user.setPassword(App.config.defaultPassword());
 
-        return authLoginRequest;
+        return user;
     }
 
-    public static Booking newBooking() {
+    public static Room newRoom() {
+        Room room = new Room();
+
+
+
+        return room;
+    }
+
+    public static Booking newBooking(int roomId) {
         Booking booking = new Booking();
 
+        booking.setFirstname(faker.name().firstName());
+        booking.setLastname(faker.name().lastName());
+        booking.setDepositpaid(faker.bool().bool());
+        booking.setPhone(faker.phoneNumber().subscriberNumber(11));
+        booking.setEmail(faker.bothify("????##@gmail.com"));
+        booking.setRoomid(roomId);
+
+        BookingDates bookingDates = new BookingDates();
+
+        Date checkIn = new Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(checkIn);
+        c.add(Calendar.DATE, (int)faker.random().nextInt(1, 10));
+        Date checkOut = c.getTime();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        bookingDates.setCheckin(sdf.format(checkIn));
+        bookingDates.setCheckout(sdf.format(checkOut));
+
+        booking.setBookingdates(bookingDates);
 
         return booking;
     }

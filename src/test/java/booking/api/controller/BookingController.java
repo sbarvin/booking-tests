@@ -6,8 +6,6 @@ import booking.data.TestData;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import java.util.Collections;
-
 import static io.restassured.RestAssured.post;
 
 public class BookingController extends ApiController {
@@ -40,12 +38,21 @@ public class BookingController extends ApiController {
     }
 
     @Step("Create booking")
-    public Response create() {
+    public Response create(int roomId) {
         reqSpec
                 .addCookie(TOKEN.get())
-                .setBody(TestData.newBooking());
+                .setBody(TestData.newBooking(roomId));
 
         return post("/booking/");
+    }
+
+    @Step("Update booking")
+    public Response update(Booking booking) {
+        reqSpec
+                .addCookie(TOKEN.get())
+                .setBody(booking);
+
+        return put("/booking/" + booking.getBookingid().toString());
     }
 
     @Step("Delete booking")

@@ -2,28 +2,24 @@ package booking.tests.api;
 
 import booking.api.client.ApiClient;
 import booking.api.model.booking.Booking;
-import booking.api.model.booking.BookingDates;
 import booking.api.model.booking.Bookings;
 import booking.api.model.booking.NewBooking;
-import io.qameta.allure.restassured.AllureRestAssured;
+import booking.data.TestData;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static io.restassured.RestAssured.given;
 
 public class BookingApiTest {
 
     private final ApiClient apiClient = ApiClient.api();
 
     @BeforeEach
-    void predictions() {
+    void preconditions() {
         apiClient.auth().loginAsDefaultUser();
     }
 
     @AfterEach
-    void afterdictions() {
+    void postconditions() {
         apiClient.auth().logout();
     }
 
@@ -37,13 +33,14 @@ public class BookingApiTest {
 
     @Test
     void getBookingTest() {
-        Bookings bookings = apiClient.booking().getAll()
+        Booking bookingRequest = TestData.newBooking(1);
+
+        NewBooking newBooking = apiClient.booking().create(bookingRequest)
                 .then()
-                .statusCode(200)
-                .extract().as(Bookings.class);
+                .extract().as(NewBooking.class);
 
         Booking bookingResponse = apiClient.booking().getById(
-                        bookings.getBookings().get(0).getBookingid().toString()
+                        newBooking.getBookingid().toString()
                 )
                 .then()
                 .statusCode(200)
@@ -52,19 +49,7 @@ public class BookingApiTest {
 
     @Test
     void createBookingTest() {
-        Booking bookingRequest = new Booking();
-        bookingRequest.setFirstname("Sergey");
-        bookingRequest.setLastname("Barvin");
-        bookingRequest.setDepositpaid(true);
-        bookingRequest.setPhone("12324324234324324");
-        bookingRequest.setEmail("933@bsk.ru");
-        bookingRequest.setRoomid(1);
-
-        BookingDates bookingDates = new BookingDates();
-        bookingDates.setCheckin("2018-01-01");
-        bookingDates.setCheckout("2019-01-01");
-
-        bookingRequest.setBookingdates(bookingDates);
+        Booking bookingRequest = TestData.newBooking(1);
 
         NewBooking bookingResponse = apiClient.booking().create(bookingRequest)
                 .then()
@@ -73,8 +58,35 @@ public class BookingApiTest {
 
         apiClient.booking().del(bookingResponse.getBookingid().toString())
                 .then()
-                .statusCode(200);
+                .statusCode(202);
+    }
 
+    @Test
+    void updateBookingTest() {
+        Booking bookingRequest = TestData.newBooking(1);
+
+        NewBooking bookingResponse = apiClient.booking().create(bookingRequest)
+                .then()
+                .extract().as(NewBooking.class);
+
+        apiClient.booking().del(bookingResponse.getBookingid().toString());
+    }
+
+    @Test
+    void deleteBookingTest() {
+        Booking bookingRequest = TestData.newBooking(1);
+
+        NewBooking newBooking = apiClient.booking().create(bookingRequest)
+                .then()
+                .extract().as(NewBooking.class);
+
+        apiClient.booking().del(newBooking.getBookingid().toString())
+                .then()
+                .statusCode(202);
+
+        apiClient.booking().getById(newBooking.getBookingid().toString())
+                .then()
+                .statusCode(400);
     }
 
 }

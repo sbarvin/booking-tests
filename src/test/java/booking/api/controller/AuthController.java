@@ -1,6 +1,7 @@
 package booking.api.controller;
 
 import booking.api.client.ApiConfig;
+import booking.api.model.auth.Token;
 import booking.api.model.auth.User;
 import booking.data.TestData;
 import io.qameta.allure.Step;
@@ -28,9 +29,23 @@ public class AuthController extends ApiController {
 
     @Step("Logout")
     public Response logout() {
-        reqSpec.addCookie(TOKEN.get());
-        Response response = post("/auth/logout");
+        Token token = new Token();
+        token
+                .setToken(TOKEN.get().getValue());
+        reqSpec
+                .addCookie(TOKEN.get())
+                .setBody(token);
+        return post("/auth/logout");
+    }
 
-        return response;
+    @Step("Logout")
+    public Response validate() {
+        Token token = new Token();
+        token
+                .setToken(TOKEN.get().getValue());
+        reqSpec
+                .addCookie(TOKEN.get())
+                .setBody(token);
+        return post("/auth/validate");
     }
 }

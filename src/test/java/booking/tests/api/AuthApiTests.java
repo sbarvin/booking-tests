@@ -24,14 +24,14 @@ public class AuthApiTests {
     @DisplayName("Аутентификация. Получение токена")
     void authTest() {
 
-        User authLoginRequest = new User();
-        authLoginRequest.setUsername("admin");
-        authLoginRequest.setPassword("password");
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("password");
 
         Cookies cookies = given()
                 .filter(new AllureRestAssured())
                 .contentType(ContentType.JSON)
-                .body(authLoginRequest)
+                .body(user)
                 .log().all()
                 .post("/auth/login")
                 .then()
