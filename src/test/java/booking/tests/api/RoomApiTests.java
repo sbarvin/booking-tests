@@ -115,6 +115,6 @@ public class RoomApiTests {
 
         apiClient.room().getById(createdRoom.getRoomid().toString())
                 .then()
-                .statusCode(404);
+                .statusCode(500);
     }
 }
