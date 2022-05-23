@@ -40,7 +40,7 @@ public class RoomController extends ApiController {
                 .addCookie(TOKEN.get())
                 .setBody(room);
 
-        return put("/room/" + room.getRoomId().toString());
+        return put("/room/" + room.getRoomid().toString());
     }
 
     @Step("Delete room")
