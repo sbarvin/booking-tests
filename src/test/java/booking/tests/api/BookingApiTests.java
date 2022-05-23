@@ -11,10 +11,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class BookingApiTests {
 
     private final ApiClient apiClient = ApiClient.api();
-    private Integer roomId = 1;
+    private Integer roomId;
 
 
     @BeforeEach
@@ -22,7 +26,7 @@ public class BookingApiTests {
         apiClient.auth().loginAsDefaultUser();
         roomId = apiClient.room().create(TestData.newRoom())
                 .then()
-                .extract().as(Room.class).getRoomId();
+                .extract().as(Room.class).getRoomid();
     }
 
     @AfterEach
@@ -34,38 +38,61 @@ public class BookingApiTests {
     @Test
     @DisplayName("Get all bookings")
     void getAllBookingTest() {
-        Bookings bookingsResponse = apiClient.booking().getAll()
-                .then()
-                .statusCode(200)
-                .extract().as(Bookings.class);
-    }
-
-    @Test
-    @DisplayName("Get booking by id")
-    void getBookingTest() {
-        Booking bookingRequest = TestData.newBooking(roomId);
-
-        NewBooking newBooking = apiClient.booking().create(bookingRequest)
+        NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
                 .extract().as(NewBooking.class);
 
-        Booking bookingResponse = apiClient.booking().getById(
-                        newBooking.getBookingid().toString()
-                )
+        Bookings bookings = apiClient.booking().getAll()
                 .then()
                 .statusCode(200)
-                .extract().as(Booking.class);
+                .extract().as(Bookings.class);
+
+        assertTrue(bookings.getBookings().size() > 0);
+        assertTrue(bookings.getBookings().contains(createdBooking.getBooking()));
+
+        apiClient.booking().del(createdBooking.getBookingid().toString())
+                .then()
+                .statusCode(202);
     }
 
     @Test
-    @DisplayName("Create new booking")
+    @DisplayName("Get booking")
+    void getBookingTest() {
+        NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
+                .then()
+                .extract().as(NewBooking.class);
+
+        Booking booking = apiClient.booking().getById(createdBooking.getBookingid().toString())
+                .then()
+                .statusCode(200)
+                .extract().as(Booking.class);
+
+        assertEquals(createdBooking.getBooking(), booking);
+
+        apiClient.booking().del(booking.getBookingid().toString())
+                .then()
+                .statusCode(202);
+    }
+
+    @Test
+    @DisplayName("Create booking")
     void createBookingTest() {
-        NewBooking newBooking = apiClient.booking().create(TestData.newBooking(roomId))
+
+        Booking booking = TestData.newBooking(roomId);
+
+        NewBooking createdBooking = apiClient.booking().create(booking)
                 .then()
                 .statusCode(201)
                 .extract().as(NewBooking.class);
 
-        apiClient.booking().del(newBooking.getBookingid().toString())
+        assertEquals(createdBooking.getBooking().getRoomid(), booking.getRoomid());
+        assertNotNull(createdBooking.getBooking().getBookingid());
+
+        apiClient.booking().getById(createdBooking.getBookingid().toString())
+                .then()
+                .statusCode(200);
+
+        apiClient.booking().del(createdBooking.getBookingid().toString())
                 .then()
                 .statusCode(202);
     }
@@ -73,29 +100,35 @@ public class BookingApiTests {
     @Test
     @DisplayName("Update booking")
     void updateBookingTest() {
-        Booking newBooking = TestData.newBooking(roomId);
-
-        NewBooking bookingResponse = apiClient.booking().create(newBooking)
+        NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
                 .extract().as(NewBooking.class);
 
-        apiClient.booking().del(bookingResponse.getBookingid().toString());
+        String newLastName = createdBooking.getBooking().getLastname().toUpperCase(Locale.ROOT);
+        createdBooking.getBooking().setLastname(newLastName);
+
+        NewBooking updatedBooking = apiClient.booking().update(createdBooking.getBooking())
+                .then()
+                .statusCode(200)
+                .extract().as(NewBooking.class);
+
+        assertEquals(updatedBooking.getBooking(), createdBooking.getBooking());
+
+        apiClient.booking().del(updatedBooking.getBookingid().toString());
     }
 
     @Test
     @DisplayName("Delete booking")
     void deleteBookingTest() {
-        Booking bookingRequest = TestData.newBooking(roomId);
-
-        NewBooking newBooking = apiClient.booking().create(bookingRequest)
+        NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
                 .extract().as(NewBooking.class);
 
-        apiClient.booking().del(newBooking.getBookingid().toString())
+        apiClient.booking().del(createdBooking.getBookingid().toString())
                 .then()
                 .statusCode(202);
 
-        apiClient.booking().getById(newBooking.getBookingid().toString())
+        apiClient.booking().getById(createdBooking.getBookingid().toString())
                 .then()
                 .statusCode(404);
     }
