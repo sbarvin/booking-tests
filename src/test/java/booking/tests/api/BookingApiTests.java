@@ -50,9 +50,7 @@ public class BookingApiTests {
         assertTrue(bookings.getBookings().size() > 0);
         assertTrue(bookings.getBookings().contains(createdBooking.getBooking()));
 
-        apiClient.booking().del(createdBooking.getBookingid().toString())
-                .then()
-                .statusCode(202);
+        apiClient.booking().del(createdBooking.getBookingid().toString());
     }
 
     @Test
@@ -69,9 +67,7 @@ public class BookingApiTests {
 
         assertEquals(createdBooking.getBooking(), booking);
 
-        apiClient.booking().del(booking.getBookingid().toString())
-                .then()
-                .statusCode(202);
+        apiClient.booking().del(booking.getBookingid().toString());
     }
 
     @Test
@@ -92,9 +88,7 @@ public class BookingApiTests {
                 .then()
                 .statusCode(200);
 
-        apiClient.booking().del(createdBooking.getBookingid().toString())
-                .then()
-                .statusCode(202);
+        apiClient.booking().del(createdBooking.getBookingid().toString());
     }
 
     @Test
