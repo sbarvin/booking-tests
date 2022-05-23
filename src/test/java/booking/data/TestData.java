@@ -8,12 +8,12 @@ import booking.config.App;
 import com.github.javafaker.Faker;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class TestData {
 
     private final static Faker faker = new Faker();
+    private static Random rand = new Random();
 
     private TestData() {
     }
@@ -29,8 +29,22 @@ public class TestData {
     public static Room newRoom() {
         Room room = new Room();
 
+        room.setRoomName(faker.funnyName().name());
+        room.setRoomPrice((int)faker.random().nextInt(1, 999));
+        room.setAccessible(faker.bool().bool());
+        room.setDescription(faker.gameOfThrones().quote().toString());
 
+        String[] typeItems = new String[] {"Single", "Twin", "Double", "Family", "Suite"};
+        room.setType(typeItems[rand.nextInt(typeItems.length)]);
 
+        String[] featureItems = new String[] {"WiFi", "TV", "Radio", "Refreshments", "Safe", "Views"};
+        Integer cntFeatures = rand.nextInt(featureItems.length - 1) + 1;
+        List<String> features = new ArrayList<>();
+        for(int i = 0; i < cntFeatures; i++) {
+            features.add(featureItems[i]);
+        }
+
+        room.setFeatures(features);
         return room;
     }
 
