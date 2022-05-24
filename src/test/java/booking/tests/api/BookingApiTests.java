@@ -15,11 +15,9 @@ import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BookingApiTests {
+public class BookingApiTests extends ApiTestBase{
 
-    private final ApiClient apiClient = ApiClient.api();
     private Integer roomId;
-
 
     @BeforeEach
     void preconditions() {
