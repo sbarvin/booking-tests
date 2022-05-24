@@ -1,7 +1,7 @@
 package booking.api.controller;
 
 import booking.api.client.ApiConfig;
-import booking.api.model.room.Room;
+import booking.model.room.Room;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 

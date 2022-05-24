@@ -1,10 +1,10 @@
 package booking.tests.api;
 
 import booking.api.client.ApiClient;
-import booking.api.model.booking.Booking;
-import booking.api.model.booking.Bookings;
-import booking.api.model.booking.NewBooking;
-import booking.api.model.room.Room;
+import booking.model.booking.Booking;
+import booking.model.booking.Bookings;
+import booking.model.booking.NewBooking;
+import booking.model.room.Room;
 import booking.data.TestData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

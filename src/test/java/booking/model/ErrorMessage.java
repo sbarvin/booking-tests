@@ -1,4 +1,4 @@
-package booking.api.model;
+package booking.model;
 
 import lombok.Data;
 

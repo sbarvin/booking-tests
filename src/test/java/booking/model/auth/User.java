@@ -1,4 +1,4 @@
-package booking.api.model.auth;
+package booking.model.auth;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

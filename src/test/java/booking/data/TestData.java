@@ -1,9 +1,9 @@
 package booking.data;
 
-import booking.api.model.auth.User;
-import booking.api.model.booking.Booking;
-import booking.api.model.booking.BookingDates;
-import booking.api.model.room.Room;
+import booking.model.auth.User;
+import booking.model.booking.Booking;
+import booking.model.booking.BookingDates;
+import booking.model.room.Room;
 import booking.config.App;
 import com.github.javafaker.Faker;
 
@@ -27,6 +27,7 @@ public class TestData {
     }
 
     public static Room newRoom() {
+
         Room room = new Room();
 
         room.setRoomName(faker.funnyName().name());
@@ -43,8 +44,8 @@ public class TestData {
         for(int i = 0; i < cntFeatures; i++) {
             features.add(featureItems[i]);
         }
-
         room.setFeatures(features);
+
         return room;
     }
 

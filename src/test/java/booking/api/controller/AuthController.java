@@ -1,8 +1,8 @@
 package booking.api.controller;
 
 import booking.api.client.ApiConfig;
-import booking.api.model.auth.Token;
-import booking.api.model.auth.User;
+import booking.model.auth.Token;
+import booking.model.auth.User;
 import booking.data.TestData;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;

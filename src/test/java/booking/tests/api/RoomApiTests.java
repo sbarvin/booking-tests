@@ -1,8 +1,8 @@
 package booking.tests.api;
 
 import booking.api.client.ApiClient;
-import booking.api.model.room.Room;
-import booking.api.model.room.Rooms;
+import booking.model.room.Room;
+import booking.model.room.Rooms;
 import booking.data.TestData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +28,7 @@ public class RoomApiTests {
     @Test
     @DisplayName("Get all rooms")
     void getRoomsTest() {
+
         Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
                 .extract().as(Room.class);
@@ -41,6 +42,7 @@ public class RoomApiTests {
         assertTrue(rooms.getRooms().contains(createdRoom));
 
         apiClient.room().del(createdRoom.getRoomid().toString());
+
     }
 
     @Test
@@ -59,11 +61,13 @@ public class RoomApiTests {
         assertEquals(createdRoom, room);
 
         apiClient.room().del(createdRoom.getRoomid().toString());
+
     }
 
     @Test
     @DisplayName("Create room")
     void createRoomTest() {
+
         Room room = TestData.newRoom();
 
         Room createdRoom = apiClient.room().create(room)
@@ -79,11 +83,14 @@ public class RoomApiTests {
                 .statusCode(200);
 
         apiClient.room().del(createdRoom.getRoomid().toString());
+
     }
+
 
     @Test
     @DisplayName("Update room")
     void updateRoomTest() {
+
         Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
                 .extract().as(Room.class);
@@ -100,11 +107,13 @@ public class RoomApiTests {
         assertEquals(updatedRoom, createdRoom);
 
         apiClient.room().del(updatedRoom.getRoomid().toString());
+
     }
 
     @Test
     @DisplayName("Delete room")
     void deleteRoomTest() {
+
         Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
                 .extract().as(Room.class);
@@ -116,5 +125,6 @@ public class RoomApiTests {
         apiClient.room().getById(createdRoom.getRoomid().toString())
                 .then()
                 .statusCode(500);
+
     }
 }

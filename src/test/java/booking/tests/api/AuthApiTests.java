@@ -1,6 +1,6 @@
 package booking.tests.api;
 
-import booking.api.model.auth.User;
+import booking.model.auth.User;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;

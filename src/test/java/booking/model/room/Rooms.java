@@ -1,4 +1,4 @@
-package booking.api.model.room;
+package booking.model.room;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
