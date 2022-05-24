@@ -38,7 +38,7 @@ public class AuthController extends ApiController {
         return post("/auth/logout");
     }
 
-    @Step("Logout")
+    @Step("Validate token")
     public Response validate() {
         Token token = new Token();
         token
