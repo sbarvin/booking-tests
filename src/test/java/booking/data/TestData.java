@@ -31,9 +31,9 @@ public class TestData {
         Room room = new Room();
 
         room.setRoomName(faker.funnyName().name());
-        room.setRoomPrice((int)faker.random().nextInt(1, 999));
+        room.setRoomPrice(faker.random().nextInt(1, 999));
         room.setAccessible(faker.bool().bool());
-        room.setDescription(faker.gameOfThrones().quote().toString());
+        room.setDescription(faker.gameOfThrones().quote());
 
         String[] typeItems = new String[] {"Single", "Twin", "Double", "Family", "Suite"};
         room.setType(typeItems[rand.nextInt(typeItems.length)]);
