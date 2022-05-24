@@ -1,54 +1,59 @@
 package booking.tests.api;
 
-import booking.model.auth.User;
-import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.http.Cookies;
-import org.junit.jupiter.api.BeforeAll;
+import booking.api.client.ApiClient;
+import io.restassured.http.Cookie;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AuthApiTests {
-    @BeforeAll
-    static void prediction() {
-        baseURI = "https://automationintesting.online";
+    private final ApiClient apiClient = ApiClient.api();
+
+    @Test
+    @DisplayName("Login")
+    void loginTest() {
+        Cookie authToken = apiClient.auth().loginAsDefaultUser()
+                .then()
+                .statusCode(200)
+                .extract().detailedCookie("token");
+
+        assertNotNull(authToken);
+
+        apiClient.booking().getAll()
+                .then()
+                .statusCode(200);
+
+        apiClient.auth().logout();
     }
 
-    @Tag("api")
     @Test
-    @DisplayName("Аутентификация. Получение токена")
-    void authTest() {
+    @DisplayName("Logout")
+    void logoutTest() {
+        apiClient.auth().loginAsDefaultUser();
 
-        User user = new User();
-        user.setUsername("admin");
-        user.setPassword("password");
-
-        Cookies cookies = given()
-                .filter(new AllureRestAssured())
-                .contentType(ContentType.JSON)
-                .body(user)
-                .log().all()
-                .post("/auth/login")
+        apiClient.auth().logout()
                 .then()
-                .statusCode(200)
-                .log().all()
-                .extract()
-                .response()
-                .getDetailedCookies();
+                .statusCode(200);
 
-        given()
-                .filter(new AllureRestAssured())
-                .cookie(cookies.get("token"))
-                .log().all()
-                .get("/booking")
+        apiClient.booking().getAll()
                 .then()
-                .statusCode(200)
-                .log().all();
+                .statusCode(403);
+    }
 
+    @Test
+    @DisplayName("Validate token")
+    void validateTokenTest() {
+        apiClient.auth().loginAsDefaultUser();
+
+        apiClient.auth().validate()
+                .then()
+                .statusCode(200);
+
+        apiClient.auth().logout();
+
+        apiClient.auth().validate()
+                .then()
+                .statusCode(403);
     }
 }
