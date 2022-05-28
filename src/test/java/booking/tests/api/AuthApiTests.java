@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AuthApiTests extends ApiTestBase{
+public class AuthApiTests {
+
+    public final ApiClient apiClient = ApiClient.api();
 
     @Test
     @DisplayName("Login")
