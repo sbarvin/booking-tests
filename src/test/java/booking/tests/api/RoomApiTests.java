@@ -39,7 +39,6 @@ public class RoomApiTests {
                 .extract().as(Rooms.class);
 
         assertTrue(rooms.getRooms().size() > 0);
-        assertTrue(rooms.getRooms().contains(createdRoom));
 
         apiClient.room().del(createdRoom.getRoomid().toString());
 
