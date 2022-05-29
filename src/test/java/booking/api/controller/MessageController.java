@@ -44,11 +44,11 @@ public class MessageController extends ApiController{
     }
 
     @Step("Read message")
-    public Response read(String id) {
+    public Response read(Message message) {
         reqSpec
                 .addCookie(TOKEN.get());
 
-        return put("/message/" + id + "/read");
+        return put("/message/" + message.getMessageid().toString() + "/read");
     }
 
     @Step("Delete message")
