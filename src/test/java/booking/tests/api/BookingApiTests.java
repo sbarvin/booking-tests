@@ -3,7 +3,7 @@ package booking.tests.api;
 import booking.api.client.ApiClient;
 import booking.model.booking.Booking;
 import booking.model.booking.Bookings;
-import booking.model.booking.NewBooking;
+import booking.model.booking.CreatedBooking;
 import booking.model.room.Room;
 import booking.data.TestData;
 import org.junit.jupiter.api.AfterEach;
@@ -35,11 +35,11 @@ public class BookingApiTests {
     }
 
     @Test
-    @DisplayName("Get all bookings")
+    @DisplayName("Get all booking")
     void successGetAllBookingTest() {
-        NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
+        CreatedBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
-                .extract().as(NewBooking.class);
+                .extract().as(CreatedBooking.class);
 
         Bookings bookings = apiClient.booking().getAll()
                 .then()
@@ -55,9 +55,9 @@ public class BookingApiTests {
     @Test
     @DisplayName("Get booking")
     void successGetBookingTest() {
-        NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
+        CreatedBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
-                .extract().as(NewBooking.class);
+                .extract().as(CreatedBooking.class);
 
         Booking booking = apiClient.booking().getById(createdBooking.getBookingid().toString())
                 .then()
@@ -75,10 +75,10 @@ public class BookingApiTests {
 
         Booking booking = TestData.newBooking(roomId);
 
-        NewBooking createdBooking = apiClient.booking().create(booking)
+        CreatedBooking createdBooking = apiClient.booking().create(booking)
                 .then()
                 .statusCode(201)
-                .extract().as(NewBooking.class);
+                .extract().as(CreatedBooking.class);
 
         assertEquals(createdBooking.getBooking().getRoomid(), booking.getRoomid());
         assertNotNull(createdBooking.getBooking().getBookingid());
@@ -93,17 +93,17 @@ public class BookingApiTests {
     @Test
     @DisplayName("Update booking")
     void successUpdateBookingTest() {
-        NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
+        CreatedBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
-                .extract().as(NewBooking.class);
+                .extract().as(CreatedBooking.class);
 
         String newLastName = createdBooking.getBooking().getLastname().toUpperCase(Locale.ROOT);
         createdBooking.getBooking().setLastname(newLastName);
 
-        NewBooking updatedBooking = apiClient.booking().update(createdBooking.getBooking())
+        CreatedBooking updatedBooking = apiClient.booking().update(createdBooking.getBooking())
                 .then()
                 .statusCode(200)
-                .extract().as(NewBooking.class);
+                .extract().as(CreatedBooking.class);
 
         assertEquals(updatedBooking.getBooking(), createdBooking.getBooking());
 
@@ -113,9 +113,9 @@ public class BookingApiTests {
     @Test
     @DisplayName("Delete booking")
     void successDeleteBookingTest() {
-        NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
+        CreatedBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
-                .extract().as(NewBooking.class);
+                .extract().as(CreatedBooking.class);
 
         apiClient.booking().del(createdBooking.getBookingid().toString())
                 .then()
