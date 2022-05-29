@@ -1,4 +1,5 @@
 package booking.tests.ui.pages;
 
-public class PageBase {
+public class HomePage {
+
 }
