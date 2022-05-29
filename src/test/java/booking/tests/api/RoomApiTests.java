@@ -26,7 +26,7 @@ public class RoomApiTests {
     }
 
     @Test
-    @DisplayName("Get all rooms")
+    @DisplayName("Get all room")
     void successGetRoomsTest() {
 
         Room createdRoom = apiClient.room().create(TestData.newRoom())
