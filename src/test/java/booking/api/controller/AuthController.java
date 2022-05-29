@@ -2,7 +2,7 @@ package booking.api.controller;
 
 import booking.api.client.ApiConfig;
 import booking.model.auth.Token;
-import booking.model.auth.User;
+import booking.model.auth.Auth;
 import booking.data.TestData;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -14,8 +14,8 @@ public class AuthController extends ApiController {
     }
 
     @Step("Login with body")
-    public Response login(User user) {
-        reqSpec.setBody(user);
+    public Response login(Auth auth) {
+        reqSpec.setBody(auth);
         Response response = post("/auth/login");
         setToken(response.getDetailedCookie("token"));
 
