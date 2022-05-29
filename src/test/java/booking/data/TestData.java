@@ -1,8 +1,9 @@
 package booking.data;
 
-import booking.model.auth.User;
+import booking.model.auth.Auth;
 import booking.model.booking.Booking;
 import booking.model.booking.BookingDates;
+import booking.model.message.Message;
 import booking.model.room.Room;
 import booking.config.App;
 import com.github.javafaker.Faker;
@@ -18,12 +19,12 @@ public class TestData {
     private TestData() {
     }
 
-    public static User defaultUser() {
-        User user = new User();
-        user.setUsername(App.config.defaultLogin());
-        user.setPassword(App.config.defaultPassword());
+    public static Auth defaultUser() {
+        Auth auth = new Auth();
+        auth.setUsername(App.config.defaultLogin());
+        auth.setPassword(App.config.defaultPassword());
 
-        return user;
+        return auth;
     }
 
     public static Room newRoom() {
@@ -75,5 +76,17 @@ public class TestData {
         booking.setBookingdates(bookingDates);
 
         return booking;
+    }
+
+    public static Message newMessage() {
+        Message message = new Message();
+
+        message.setName(faker.name().firstName());
+        message.setPhone(faker.phoneNumber().subscriberNumber(11));
+        message.setEmail(faker.bothify("????##@gmail.com"));
+        message.setSubject(faker.funnyName().name());
+        message.setDescription(faker.gameOfThrones().quote());
+
+        return message;
     }
 }
