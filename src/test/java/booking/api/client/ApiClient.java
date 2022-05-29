@@ -2,6 +2,7 @@ package booking.api.client;
 
 import booking.api.controller.AuthController;
 import booking.api.controller.BookingController;
+import booking.api.controller.MessageController;
 import booking.api.controller.RoomController;
 
 public class ApiClient {
@@ -23,6 +24,10 @@ public class ApiClient {
 
     public RoomController room() {
         return new RoomController(ApiConfig.config().build());
+    }
+
+    public MessageController message() {
+        return new MessageController(ApiConfig.config().build());
     }
 
 }
