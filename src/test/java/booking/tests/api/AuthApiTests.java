@@ -13,7 +13,7 @@ public class AuthApiTests {
 
     @Test
     @DisplayName("Login")
-    void loginTest() {
+    void successLoginTest() {
         Cookie authToken = apiClient.auth().loginAsDefaultUser()
                 .then()
                 .statusCode(200)
@@ -30,7 +30,7 @@ public class AuthApiTests {
 
     @Test
     @DisplayName("Logout")
-    void logoutTest() {
+    void successLogoutTest() {
         apiClient.auth().loginAsDefaultUser();
 
         apiClient.auth().logout()
@@ -44,7 +44,7 @@ public class AuthApiTests {
 
     @Test
     @DisplayName("Validate token")
-    void validateTokenTest() {
+    void successValidateTokenTest() {
         apiClient.auth().loginAsDefaultUser();
 
         apiClient.auth().validate()

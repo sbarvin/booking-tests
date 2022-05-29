@@ -36,7 +36,7 @@ public class BookingApiTests {
 
     @Test
     @DisplayName("Get all bookings")
-    void getAllBookingTest() {
+    void successGetAllBookingTest() {
         NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
                 .extract().as(NewBooking.class);
@@ -54,7 +54,7 @@ public class BookingApiTests {
 
     @Test
     @DisplayName("Get booking")
-    void getBookingTest() {
+    void successGetBookingTest() {
         NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
                 .extract().as(NewBooking.class);
@@ -71,7 +71,7 @@ public class BookingApiTests {
 
     @Test
     @DisplayName("Create booking")
-    void createBookingTest() {
+    void successCreateBookingTest() {
 
         Booking booking = TestData.newBooking(roomId);
 
@@ -92,7 +92,7 @@ public class BookingApiTests {
 
     @Test
     @DisplayName("Update booking")
-    void updateBookingTest() {
+    void successUpdateBookingTest() {
         NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
                 .extract().as(NewBooking.class);
@@ -112,7 +112,7 @@ public class BookingApiTests {
 
     @Test
     @DisplayName("Delete booking")
-    void deleteBookingTest() {
+    void successDeleteBookingTest() {
         NewBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
                 .then()
                 .extract().as(NewBooking.class);

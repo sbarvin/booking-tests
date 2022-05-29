@@ -27,7 +27,7 @@ public class RoomApiTests {
 
     @Test
     @DisplayName("Get all rooms")
-    void getRoomsTest() {
+    void successGetRoomsTest() {
 
         Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
@@ -46,7 +46,7 @@ public class RoomApiTests {
 
     @Test
     @DisplayName("Get room")
-    void getRoomTest() {
+    void successGetRoomTest() {
 
         Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
@@ -65,7 +65,7 @@ public class RoomApiTests {
 
     @Test
     @DisplayName("Create room")
-    void createRoomTest() {
+    void successCreateRoomTest() {
 
         Room room = TestData.newRoom();
 
@@ -88,7 +88,7 @@ public class RoomApiTests {
 
     @Test
     @DisplayName("Update room")
-    void updateRoomTest() {
+    void successUpdateRoomTest() {
 
         Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
@@ -111,7 +111,7 @@ public class RoomApiTests {
 
     @Test
     @DisplayName("Delete room")
-    void deleteRoomTest() {
+    void successDeleteRoomTest() {
 
         Room createdRoom = apiClient.room().create(TestData.newRoom())
                 .then()
