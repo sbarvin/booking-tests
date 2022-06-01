@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Rooms {
-    private List<Rooms> rooms;
+    private List<Room> rooms;
 }
