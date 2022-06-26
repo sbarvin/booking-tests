@@ -7,7 +7,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class LetMeHackComponent {
 
-    @Step("Let me hack!")
     public LetMeHackComponent letMeHack() {
         var banner = $("#collapseBanner");
 
