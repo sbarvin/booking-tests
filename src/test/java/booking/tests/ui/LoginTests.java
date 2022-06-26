@@ -1,12 +1,14 @@
 package booking.tests.ui;
 
-import booking.allure.JiraIssue;
+import booking.annotations.JiraIssue;
+import booking.annotations.Layer;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Layer("web")
 @Owner("barvinsk")
 @Feature("Login")
 public class LoginTests extends TestBase {

@@ -1,4 +1,4 @@
-package booking.allure;
+package booking.annotations;
 
 import io.qameta.allure.LabelAnnotation;
 

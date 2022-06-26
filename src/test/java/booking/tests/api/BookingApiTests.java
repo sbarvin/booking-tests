@@ -1,6 +1,7 @@
 package booking.tests.api;
 
-import booking.allure.JiraIssue;
+import booking.annotations.JiraIssue;
+import booking.annotations.Layer;
 import booking.api.client.ApiClient;
 import booking.model.booking.Booking;
 import booking.model.booking.Bookings;
@@ -15,6 +16,7 @@ import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Layer("rest")
 @Owner("barvinsk")
 @Feature("Booking")
 public class BookingApiTests {

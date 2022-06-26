@@ -1,6 +1,7 @@
 package booking.tests.api;
 
-import booking.allure.JiraIssue;
+import booking.annotations.JiraIssue;
+import booking.annotations.Layer;
 import booking.api.client.ApiClient;
 import booking.data.TestData;
 import booking.model.message.Count;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Layer("rest")
 @Owner("barvinsk")
 @Feature("Message")
 public class MessageApiTests {

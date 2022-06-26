@@ -1,4 +1,4 @@
-package booking.allure;
+package booking.annotations;
 
 import java.lang.annotation.*;
 

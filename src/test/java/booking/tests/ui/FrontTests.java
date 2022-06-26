@@ -1,20 +1,16 @@
 package booking.tests.ui;
 
-import booking.allure.JiraIssue;
+import booking.annotations.JiraIssue;
+import booking.annotations.Layer;
 import booking.data.TestData;
 import booking.model.booking.Booking;
-import booking.model.booking.Bookings;
 import booking.model.message.Message;
 import booking.model.room.Room;
-import booking.model.room.Rooms;
-import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
-import org.slf4j.ILoggerFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+@Layer("web")
 @Owner("barvinsk")
 @Feature("Front")
 public class FrontTests extends TestBase{

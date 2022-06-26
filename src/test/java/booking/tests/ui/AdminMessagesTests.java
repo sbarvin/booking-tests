@@ -1,13 +1,14 @@
 package booking.tests.ui;
 
-import booking.allure.JiraIssue;
-import booking.api.client.ApiClient;
+import booking.annotations.JiraIssue;
+import booking.annotations.Layer;
 import booking.data.TestData;
 import booking.model.message.Message;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
 
+@Layer("web")
 @Owner("barvinsk")
 @Feature("Admin messages")
 public class AdminMessagesTests extends TestBase{

@@ -1,6 +1,7 @@
 package booking.tests.api;
 
-import booking.allure.JiraIssue;
+import booking.annotations.JiraIssue;
+import booking.annotations.Layer;
 import booking.api.client.ApiClient;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Layer("rest")
 @Owner("barvinsk")
 @Feature("Auth")
 public class AuthApiTests {

@@ -1,6 +1,7 @@
 package booking.tests.api;
 
-import booking.allure.JiraIssue;
+import booking.annotations.JiraIssue;
+import booking.annotations.Layer;
 import booking.api.client.ApiClient;
 import booking.model.room.Room;
 import booking.model.room.Rooms;
@@ -11,9 +12,10 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Layer("rest")
 @Owner("barvinsk")
 @Feature("Room")
-public class RoomApiTests {
+class RoomApiTests {
 
     private final ApiClient apiClient = ApiClient.api();
 
