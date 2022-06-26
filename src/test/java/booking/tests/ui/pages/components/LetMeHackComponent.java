@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class LetMeHackComponent {
 
     public LetMeHackComponent letMeHack() {
-        if($("#collapseBanner") != null)
+        if($("#collapseBanner").exists())
             $("#collapseBanner").$(".btn-primary").click();
         return this;
     }
