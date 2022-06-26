@@ -1,17 +1,18 @@
 # Проект по автоматизации тестирования системы бронирования
 https://automationintesting.online/#/
 
-## :floppy_disk: Содержание:
-- <a href="#computer-технологии-и-инструменты">Технологии и инструменты</a>
-- <a href="#notebook_with_decorative_cover-реализованные-проверки">Реализованные проверки</a>
-- <a href="#electric_plug-сборка-в-Jenkins">Сборка в Jenkins</a>
-- <a href="#arrow_forward-запуск-из-терминала">Запуск из терминала</a>
-- <a href="#open_book-allure-отчет">Allure отчет</a>
-- <a href="#open_book-allure-отчет">Allure TestOps</a>
-- <a href="#robot-отчет-в-telegram">Отчет в Telegram</a>
+## Содержание:
+- <a href="#технологии-и-инструменты">Технологии и инструменты</a>
+- <a href="#реализованные-проверки">Реализованные проверки</a>
+- <a href="#сборка-в-Jenkins">Сборка в Jenkins</a>
+- <a href="#запуск-из-терминала">Запуск из терминала</a>
+- <a href="#allure-отчет">Allure отчет</a>
+- <a href="#allure-testops">Allure TestOps</a>
+- <a href="#интеграция-с-jira">Интеграция с Jira</a>
+- <a href="#отчет-в-telegram">Отчет в Telegram</a>
 - <a href="#film_projector-видео-примеры-прохождения-тестов">Видео примеры прохождения тестов</a>
 
-## :computer: Технологии и инструменты
+## Технологии и инструменты
 <p align="center">
 <img width="6%" title="IntelliJ IDEA" src="images/logo/Intelij_IDEA.svg">
 <img width="6%" title="Java" src="images/logo/Java.svg">
@@ -25,7 +26,7 @@ https://automationintesting.online/#/
 <img width="6%" title="Telegram" src="images/logo/Telegram.svg">
 </p>
 
-## :notebook_with_decorative_cover: Реализованные проверки
+## Реализованные проверки
 #### UI тесты:
 - [✓] Бронирование комнаты
 - [✓] Отправка формы обратной связи
@@ -38,10 +39,10 @@ https://automationintesting.online/#/
 - [✓] Управление бронированием команты
 - [✓] Управление сообщениями, которые были направлены с формы обратной связи
 
-## :electric_plug: Сборка в Jenkins
+## Сборка в Jenkins
 ### <a target="_blank" href="https://jenkins.autotests.cloud/job/C11-barvinsk-diplom/">Сборка в Jenkins</a>
 <p align="center">
-<img title="Jenkins Dashboard" src="images/screenshots/jenkins project.png">
+<img title="Jenkins Dashboard" src="images/screenshots/jenkins project.PNG">
 </p>
 
 ### Параметры сборки в Jenkins:
@@ -57,7 +58,7 @@ https://automationintesting.online/#/
 - videoStorage (адрес хранилища видео прохождения кейсов)
 - threads (количество потоков, по умолчанию 5)
 
-## :arrow_forward: Запуск из терминала
+## Запуск из терминала
 Локальный запуск:
 ```
 gradle clean test
@@ -79,40 +80,40 @@ test
 -Dthreads=${THREADS}
 ```
 
-## :open_book-allure: Allure отчет
+## Allure отчет
 - ### Главный экран отчета
 <p align="center">
-<img title="Allure Overview Dashboard" src="images/screenshots/allure-report.png">
+<img title="Allure Overview Dashboard" src="images/screenshots/allure-report.PNG">
 </p>
 
 - ### Страница с проведенными тестами
 <p align="center">
-<img title="Allure Test Page" src="images/screenshots/Allure-report-suite.png">
+<img title="Allure Test Page" src="images/screenshots/Allure-report-suite.PNG">
 </p>
 
-## :open_book-allure: Allure TestOps
+## Allure TestOps
 - ### Экран с результатами запуска тестов
 <p align="center">
-<img title="TestOps Launch Page" src="images/screenshots/allure-test-ops.png">
+<img title="TestOps Launch Page" src="images/screenshots/allure-test-ops.PNG">
 </p>
 
 - ### Страница с тестами в TestOps
 <p align="center">
-<img title="TestOps tests page" src="images/screenshots/allure-test-ops-test-case.png">
+<img title="TestOps tests page" src="images/screenshots/allure-test-ops-test-case.PNG">
 </p>
 
-## :point_up_2: Интеграция с Jira
+## Интеграция с Jira
 - ### Страница с задачей в Jira
 <p align="center">
-<img title="Jira issue" src="images/screenshots/jira.png">
+<img title="Jira issue" src="images/screenshots/jira.PNG">
 </p>
 
-## :robot: Отчет в Telegram
+## Отчет в Telegram
 <p align="center">
-<img title="Telegram notification message" src="images/screenshots/telegram.png">
+<img title="Telegram notification message" src="images/screenshots/telegram.PNG">
 </p>
 
-## :film_projector: Видео примеры прохождения тестов
+## Видео примеры прохождения тестов
 > К каждому тесту в отчете прилагается видео. Одно из таких видео представлено ниже.
 <p align="center">
   <img title="Selenoid Video" src="images/gif/selenoid.gif">
