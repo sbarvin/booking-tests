@@ -66,7 +66,7 @@ public class TestData {
 
         Calendar c = Calendar.getInstance();
         c.setTime(checkIn);
-        c.add(Calendar.DATE, (int)faker.random().nextInt(1, 10));
+        c.add(Calendar.DATE, 1);
         Date checkOut = c.getTime();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
