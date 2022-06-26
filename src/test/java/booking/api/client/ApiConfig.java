@@ -27,7 +27,6 @@ public class ApiConfig {
                 .setContentType(JSON)
                 .addFilter(customLogFilter().withCustomTemplates())
                 .setBaseUri(App.config.apiUrl())
-                .setBasePath(App.config.apiPath())
                 .log(ALL);
         this.responseSpecBuilder = new ResponseSpecBuilder().log(ALL);
 
