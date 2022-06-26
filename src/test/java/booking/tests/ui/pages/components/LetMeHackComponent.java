@@ -8,11 +8,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class LetMeHackComponent {
 
     public LetMeHackComponent letMeHack() {
-        var banner = $("#collapseBanner");
-
-        if(banner != null)
-            banner.$(".btn-primary").click();
-
+        if($("#collapseBanner") != null)
+            $("#collapseBanner").$(".btn-primary").click();
         return this;
     }
 }

@@ -1,0 +1,17 @@
+{
+  "base": {
+    "project": "",
+    "environment": "PROD",
+    "comment": "Проект по автоматизации тестирования API и UI http://automationintesting.online",
+    "reportLink": "",
+    "language": "ru",
+    "messenger": "telegram",
+    "allureFolder": "allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "5364870352:AAHr61IpUOu7m8_FMZxKvXhY89TyREbIT90",
+    "chat": "361316987",
+    "replyTo": ""
+  }
+}
