@@ -1,16 +1,18 @@
 package booking.tests.api;
 
+import booking.allure.JiraIssue;
 import booking.api.client.ApiClient;
 import booking.model.room.Room;
 import booking.model.room.Rooms;
 import booking.data.TestData;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Owner("barvinsk")
+@Feature("Room")
 public class RoomApiTests {
 
     private final ApiClient apiClient = ApiClient.api();
@@ -25,7 +27,9 @@ public class RoomApiTests {
         apiClient.auth().logout();
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Get all room")
     void successGetAllRoomTest() {
 
@@ -44,7 +48,9 @@ public class RoomApiTests {
 
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Get room")
     void successGetRoomTest() {
 
@@ -63,7 +69,9 @@ public class RoomApiTests {
 
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Create room")
     void successCreateRoomTest() {
 
@@ -86,7 +94,9 @@ public class RoomApiTests {
     }
 
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Update room")
     void successUpdateRoomTest() {
 
@@ -109,7 +119,9 @@ public class RoomApiTests {
 
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Delete room")
     void successDeleteRoomTest() {
 

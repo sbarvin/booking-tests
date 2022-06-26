@@ -1,19 +1,22 @@
 package booking.tests.ui;
 
+import booking.allure.JiraIssue;
 import booking.api.client.ApiClient;
 import booking.data.TestData;
 import booking.model.message.Message;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+@Owner("barvinsk")
+@Feature("Admin messages")
 public class AdminMessagesTests extends TestBase{
 
     private static Message message = TestData.newMessage();
     private static Message createdMessage;
 
     @BeforeEach
-    void presteps()
+    void preconditions()
     {
         apiClient.auth().loginAsDefaultUser();
 
@@ -29,7 +32,9 @@ public class AdminMessagesTests extends TestBase{
                 .login();
     }
 
+    @Tag("UI")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Open message")
     void successOpenMessage() {
 
@@ -46,7 +51,9 @@ public class AdminMessagesTests extends TestBase{
 
     }
 
+    @Tag("UI")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Check message status")
     void successCheckMessage() {
 
@@ -63,7 +70,9 @@ public class AdminMessagesTests extends TestBase{
 
     }
 
+    @Tag("UI")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Delete message")
     void successDeleteMessage() {
 

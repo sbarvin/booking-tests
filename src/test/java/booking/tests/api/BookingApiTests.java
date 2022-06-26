@@ -1,20 +1,22 @@
 package booking.tests.api;
 
+import booking.allure.JiraIssue;
 import booking.api.client.ApiClient;
 import booking.model.booking.Booking;
 import booking.model.booking.Bookings;
 import booking.model.booking.CreatedBooking;
 import booking.model.room.Room;
 import booking.data.TestData;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import org.junit.jupiter.api.*;
 
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Owner("barvinsk")
+@Feature("Booking")
 public class BookingApiTests {
 
     public final ApiClient apiClient = ApiClient.api();
@@ -34,7 +36,9 @@ public class BookingApiTests {
         apiClient.auth().logout();
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Get all booking")
     void successGetAllBookingTest() {
         CreatedBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
@@ -52,7 +56,9 @@ public class BookingApiTests {
         apiClient.booking().del(createdBooking.getBookingid().toString());
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Get booking")
     void successGetBookingTest() {
         CreatedBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
@@ -69,7 +75,9 @@ public class BookingApiTests {
         apiClient.booking().del(booking.getBookingid().toString());
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Create booking")
     void successCreateBookingTest() {
 
@@ -90,7 +98,9 @@ public class BookingApiTests {
         apiClient.booking().del(createdBooking.getBookingid().toString());
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Update booking")
     void successUpdateBookingTest() {
         CreatedBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))
@@ -110,7 +120,9 @@ public class BookingApiTests {
         apiClient.booking().del(updatedBooking.getBookingid().toString());
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Delete booking")
     void successDeleteBookingTest() {
         CreatedBooking createdBooking = apiClient.booking().create(TestData.newBooking(roomId))

@@ -1,18 +1,20 @@
 package booking.tests.api;
 
+import booking.allure.JiraIssue;
 import booking.api.client.ApiClient;
 import booking.data.TestData;
 import booking.model.message.Count;
 import booking.model.message.Message;
 import booking.model.message.Messages;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Owner("barvinsk")
+@Feature("Message")
 public class MessageApiTests {
 
     public final ApiClient apiClient = ApiClient.api();
@@ -27,7 +29,9 @@ public class MessageApiTests {
         apiClient.auth().logout();
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Get all message")
     void successGetAllMessageTest() {
         Message createdMessage = apiClient.message().create(TestData.newMessage())
@@ -45,7 +49,9 @@ public class MessageApiTests {
         apiClient.message().del(createdMessage.getMessageid().toString());
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Get message")
     void successGetMessageTest() {
 
@@ -64,7 +70,9 @@ public class MessageApiTests {
 
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Create message")
     void successCreateMessageTest() {
 
@@ -87,7 +95,9 @@ public class MessageApiTests {
     }
 
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Read message")
     void successReadMessageTest() {
 
@@ -114,7 +124,9 @@ public class MessageApiTests {
 
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Get message unreadble count")
     void successGetMessageUnreadbleCountTest() {
 
@@ -143,7 +155,9 @@ public class MessageApiTests {
 
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Delete message")
     void successDeleteMessageTest() {
 

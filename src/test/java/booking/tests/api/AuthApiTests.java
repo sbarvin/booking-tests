@@ -1,17 +1,25 @@
 package booking.tests.api;
 
+import booking.allure.JiraIssue;
 import booking.api.client.ApiClient;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import io.restassured.http.Cookie;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Owner("barvinsk")
+@Feature("Auth")
 public class AuthApiTests {
 
     public final ApiClient apiClient = ApiClient.api();
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Login")
     void successLoginTest() {
         Cookie authToken = apiClient.auth().loginAsDefaultUser()
@@ -28,7 +36,9 @@ public class AuthApiTests {
         apiClient.auth().logout();
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Logout")
     void successLogoutTest() {
         apiClient.auth().loginAsDefaultUser();
@@ -42,7 +52,9 @@ public class AuthApiTests {
                 .statusCode(403);
     }
 
+    @Tag("API")
     @Test
+    @JiraIssue("HOMEWORK-401")
     @DisplayName("Validate token")
     void successValidateTokenTest() {
         apiClient.auth().loginAsDefaultUser();
