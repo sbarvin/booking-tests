@@ -41,6 +41,7 @@ public class TestBase {
             if (Configuration.browser.equals(Browsers.CHROME))
                 AllureAttachments.addBrowserConsoleLogs();
             AllureAttachments.addScreenshotAs("Last screenshot");
+            AllureAttachments.addVideo(WebDriverRunner.driver().getSessionId().toString());
         }
 
         WebDriverRunner.closeWebDriver();
