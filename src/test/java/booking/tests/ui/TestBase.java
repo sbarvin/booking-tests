@@ -2,6 +2,7 @@ package booking.tests.ui;
 
 import booking.api.client.ApiClient;
 import booking.helpers.AllureAttachments;
+import booking.helpers.Attach;
 import booking.helpers.DriverSettings;
 import booking.tests.ui.pages.AdminMessagesPage;
 import booking.tests.ui.pages.FrontPage;
@@ -19,6 +20,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 @ExtendWith({AllureJunit5.class})
 public class TestBase {
 
@@ -35,6 +38,16 @@ public class TestBase {
     }
 
     @AfterEach
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+        closeWebDriver();
+
+    }
+
+    /*@AfterEach
     public void addAttachments() {
         if (WebDriverRunner.driver().hasWebDriverStarted()) {
             AllureAttachments.addPageSource();
@@ -45,5 +58,5 @@ public class TestBase {
         }
 
         WebDriverRunner.closeWebDriver();
-    }
+    }*/
 }
