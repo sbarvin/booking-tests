@@ -10,7 +10,7 @@ https://automationintesting.online/#/
 - <a href="#allure-testops">Allure TestOps</a>
 - <a href="#интеграция-с-jira">Интеграция с Jira</a>
 - <a href="#отчет-в-telegram">Отчет в Telegram</a>
-- <a href="#film_projector-видео-примеры-прохождения-тестов">Видео примеры прохождения тестов</a>
+- <a href="#видео-примеры-прохождения-тестов">Видео примеры прохождения тестов</a>
 
 ## Технологии и инструменты
 <p align="center">
